@@ -6,7 +6,14 @@ Functions to help with checking your app's online status
 This is a Kotlin-only library which relies heavily on generics and type inference to make writing to and reading from Android SharedPreferences as easy as possible. For example:
 
 ```kotlin
-    val prefs = Prefs(this)
+    val prefs = Prefs(BasicPrefsBackend(this))
+    prefs.set("key_name", "Flat Circle")
+    val ourName: String = prefs.get("key_name")
+```
+
+Or for encrypted strings:
+```kotlin
+    val prefs = Prefs(EncryptStringPrefsBackend("ExampleAlias", this))
     prefs.set("key_name", "Flat Circle")
     val ourName: String = prefs.get("key_name")
 ```
@@ -27,7 +34,9 @@ You can set and get any primitive or basic custom class into your sharedPreferen
 | ------------- | ------------- | ------------- |
 | set(key, value) | Saves a given value to sharedPreferences, where [value] is any primitive, or a custom class that can be serialized by Moshi into Json | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
 | get<Any?>(key, defaultValue?)  | Returns any value you've saved, with optional DefaultValue. | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
-| contains(context, key) | determines whether a value has been saved to sharedPreferences | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
+| contains(key) | Determines whether a value has been saved to sharedPreferences | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
+| remove(key) | Removes value associated with key from sharedPreferences | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
+| clear() | Remove all values in sharedPreferences | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
 | addCustomAdapter<Class>(adapter) | Adds a [custom moshi adapter](https://github.com/square/moshi#custom-type-adapters) for a given class | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
 
 If you are using custom classes and adapters and there is nothing to get, you will get Null Pointer exceptions unless you pass a defaultValue or use .getSafely() when you get your custom class.
