@@ -1,7 +1,7 @@
-# PreferencesHelper
+# PreferencesHelper2
 Functions to help with checking your app's online status
 
-[![CircleCI](https://circleci.com/gh/flatcircle/PreferencesHelper.svg?style=svg)](https://circleci.com/gh/flatcircle/PreferencesHelper) [ ![Download](https://api.bintray.com/packages/flatcircle/PreferencesHelper/preferenceshelper/images/download.svg) ](https://bintray.com/flatcircle/PreferencesHelper/preferenceshelper/_latestVersion)
+[![](https://jitpack.io/v/flatcircle/PreferencesHelper2.svg)](https://jitpack.io/#flatcircle/PreferencesHelper2)
 
 This is a Kotlin-only library which relies heavily on generics and type inference to make writing to and reading from Android SharedPreferences as easy as possible. For example:
 
@@ -25,13 +25,9 @@ You can set and get any primitive or basic custom class into your sharedPreferen
 
 | Function, PreferencesHelper.  | Description | Example |
 | ------------- | ------------- | ------------- |
-| set(context, key, value) | Saves a given value to sharedPreferences, where [value] is any primitive, or a custom class that can be serialized by Moshi into Json | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
-| setSync(context, key, value) | Same as set(), but uses preferencesEditor.commit() to keep the writing operation onto the same thread. | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
-| get<Any?>(context, key, defaultValue?)  | Returns any value you've saved, with optional DefaultValue. | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
-| getSafely<Any?>(context, key, defaultValue)  | Returns any value you've saved, with mandatory DefaultValue for null-safety. | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
+| set(key, value) | Saves a given value to sharedPreferences, where [value] is any primitive, or a custom class that can be serialized by Moshi into Json | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
+| get<Any?>(key, defaultValue?)  | Returns any value you've saved, with optional DefaultValue. | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
 | contains(context, key) | determines whether a value has been saved to sharedPreferences | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
-| setAndEncrypt(context, key, value) | Saves a given string as an encrypted string using the Android KeyStore to perform the encryption. Requires you to set a KeyStore Alias as below | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
-| getEncrypted(context, key) | Returns a decrypted string which was saved as an encrypted string. | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
 | addCustomAdapter<Class>(adapter) | Adds a [custom moshi adapter](https://github.com/square/moshi#custom-type-adapters) for a given class | [Example](https://github.com/flatcircle/PreferencesHelper/blob/master/app/src/main/java/io/flatcircle/preferencehelper2example/MainActivity.kt)  |
 
 If you are using custom classes and adapters and there is nothing to get, you will get Null Pointer exceptions unless you pass a defaultValue or use .getSafely() when you get your custom class.
