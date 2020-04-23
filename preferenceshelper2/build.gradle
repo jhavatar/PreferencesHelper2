@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.novoda.bintray-release'
+
+android {
+    compileSdkVersion versions.compileSdk
+
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests.all {
+            reports {
+                junitXml.enabled = true
+                junitXml.destination = file("$buildDir/../../build/test-results/preferenceshelper")
+                html.enabled = false
+            }
+        }
+    }
+}
+
+publish {
+    userOrg = 'flatcircle'
+    groupId = 'io.flatcircle'
+    repoName = 'PreferencesHelper2'
+    artifactId = 'preferenceshelper2'
+    publishVersion = '0.1.0'
+    bintrayUser = 'chesterflatcircle'
+    bintrayKey = System.getenv("BINTRAY_KEY")
+    desc = 'Utility functions for assisting access to SharedPreferences and KeyStore'
+    website = 'https://github.com/flatcircle/preferenceshelper2'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.2"
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "androidx.preference:preference-ktx:1.1.1"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+
+    lintPublish project(':preferenceslint')
+}
