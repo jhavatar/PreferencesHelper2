@@ -5,6 +5,7 @@ package io.flatcircle.preferenceshelper2
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonEncodingException
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlin.reflect.KClass
 
 object PreferencesHelper {
@@ -98,7 +99,7 @@ object PreferencesHelper {
         if (indexOfAdapter >= 0) {
             moshiBuilder.add(customAdapters[indexOfAdapter].second)
         }
-        val moshi = moshiBuilder.build()
+        val moshi = moshiBuilder.add(KotlinJsonAdapterFactory()).build()
         val jsonAdapter: JsonAdapter<T> = moshi.adapter(clazz.java)
         return jsonAdapter.toJson(input)
     }
@@ -123,7 +124,7 @@ object PreferencesHelper {
         if (indexOfAdapter >= 0) {
             moshiBuilder.add(customAdapters[indexOfAdapter].second)
         }
-        val moshi = moshiBuilder.build()
+        val moshi = moshiBuilder.add(KotlinJsonAdapterFactory()).build()
         val jsonAdapter: JsonAdapter<T> = moshi.adapter(clazz.java)
         try {
             return jsonAdapter.fromJson(input) ?: default

@@ -1,19 +1,20 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'maven'
+apply plugin: 'kotlin-kapt'
+
+version = rootProject.ext.version_name
+group = rootProject.ext.group
 
 android {
-    compileSdkVersion versions.compileSdk
-
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.compileSdk
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.version_code
+        versionName rootProject.ext.version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -34,24 +35,13 @@ android {
     }
 }
 
-publish {
-    userOrg = 'flatcircle'
-    groupId = 'io.flatcircle'
-    repoName = 'PreferencesHelper2'
-    artifactId = 'preferenceshelper2'
-    publishVersion = '0.1.0'
-    bintrayUser = 'chesterflatcircle'
-    bintrayKey = System.getenv("BINTRAY_KEY")
-    desc = 'Utility functions for assisting access to SharedPreferences and KeyStore'
-    website = 'https://github.com/flatcircle/preferenceshelper2'
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.squareup.moshi:moshi-kotlin:1.9.2"
+    implementation "com.squareup.moshi:moshi-kotlin:${rootProject.ext.moshiVersion}"
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:${rootProject.ext.moshiVersion}")
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "androidx.preference:preference-ktx:1.1.1"
