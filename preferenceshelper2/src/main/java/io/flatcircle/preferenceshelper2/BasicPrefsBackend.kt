@@ -6,7 +6,7 @@ import androidx.preference.PreferenceManager
 
 open class BasicPrefsBackend(context: Context) : PrefsBackend {
 
-    protected val sharedPrefs : SharedPreferences by lazy {
+    open protected val sharedPrefs : SharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(context)
     }
 
