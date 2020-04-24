@@ -51,7 +51,7 @@ ext {
     minSdkVersion = 19
     moshiVersion = "1.9.2"
 
-    group = "io.flatcircle.erd"
+    group = "io.flatcircle.preferenceshelper2"
     siteUrl = "https://github.com/flatcircle/preferenceshelper2"
     gitUrl = "https://github.com/flatcircle/preferenceshelper2.git"
     developerName = "flatcircle"
