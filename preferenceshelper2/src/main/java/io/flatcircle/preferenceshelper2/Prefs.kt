@@ -4,7 +4,7 @@ package io.flatcircle.preferenceshelper2
  * Class for handling an instance with a reference to context. Only use this if you understand when
  * to instantiate and .clear() the Prefs class in the Android lifecycle.
  */
-class Prefs(val backend: PrefsBackend) {
+open class Prefs(val backend: PrefsBackend) {
 
     /**
      * Get a given object from sharedpreferences with the given key.
