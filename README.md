@@ -22,7 +22,7 @@ Installation
 --------
 
 ```groovy
-implementation 'io.flatcircle:preferenceshelper:{version}'
+implementation 'com.github.flatcircle:PreferencesHelper2:{version}'
 ```
 
 Usage

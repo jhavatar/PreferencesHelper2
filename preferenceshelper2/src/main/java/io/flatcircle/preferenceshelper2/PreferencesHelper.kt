@@ -44,7 +44,7 @@ object PreferencesHelper {
     /**
      * Same as get, but enforces null safety on custom objects via the default parameter
      */
-    inline fun <reified T : Any> getSafely(prefsBackend: PrefsBackend, key: String, default: T): T {
+    inline fun <reified T : Any> getSafely(prefsBackend: PrefsBackend, key: String, default: T?): T {
         return get(prefsBackend, key, default, T::class)
     }
 
@@ -56,7 +56,7 @@ object PreferencesHelper {
             Int::class -> getInt(prefsBackend, key, default as Int? ?: 0) as T
             Float::class -> getFloat(prefsBackend, key, default as Float? ?: 0.0f) as T
             String::class -> getString(prefsBackend, key, default as String? ?: "") as T
-            Boolean::class -> getBoolean(prefsBackend, key, false) as T
+            Boolean::class -> getBoolean(prefsBackend, key, default as? Boolean ?: false) as T
             else -> {
                 if (default == null) throw IllegalArgumentException("Custom objects require a default parameter to be passed")
                 serializeFromString(getString(prefsBackend, key, ""), clazz, default)
